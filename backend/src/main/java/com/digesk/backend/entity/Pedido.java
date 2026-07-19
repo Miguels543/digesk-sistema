@@ -2,6 +2,7 @@ package com.digesk.backend.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -35,8 +36,8 @@ public class Pedido {
     @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
     private Cotizacion cotizacion;
 
-    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
-    private Comprobante comprobante;
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private List<Comprobante> comprobantes;
 
     public Integer getIdPedido() { return idPedido; }
     public void setIdPedido(Integer idPedido) { this.idPedido = idPedido; }
@@ -56,6 +57,6 @@ public class Pedido {
     public void setProducto(Producto producto) { this.producto = producto; }
     public Cotizacion getCotizacion() { return cotizacion; }
     public void setCotizacion(Cotizacion cotizacion) { this.cotizacion = cotizacion; }
-    public Comprobante getComprobante() { return comprobante; }
-    public void setComprobante(Comprobante comprobante) { this.comprobante = comprobante; }
+    public List<Comprobante> getComprobantes() { return comprobantes; }
+    public void setComprobantes(List<Comprobante> comprobantes) { this.comprobantes = comprobantes; }
 }

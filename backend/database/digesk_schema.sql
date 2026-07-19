@@ -1,3 +1,11 @@
+-- =========================================================
+-- Script de respaldo/documentación de la base de datos digeskdb
+-- Generado automáticamente por Hibernate (ddl-auto=update)
+-- Refleja la estructura física real del sistema Diges'k
+-- Actualizado: tb_comprobante ahora admite múltiples registros
+-- por pedido (pagos parciales / abonos) — relación ManyToOne
+-- =========================================================
+
 CREATE DATABASE IF NOT EXISTS digeskdb
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
@@ -58,12 +66,15 @@ CREATE TABLE tb_cotizacion (
 );
 
 -- Tabla: tb_comprobante
+-- NOTA: id_pedido ya NO es UNIQUE. Un pedido puede generar
+-- varios comprobantes (pago inicial + abonos posteriores),
+-- necesario para soportar CU-06 (Gestionar Cobranza).
 CREATE TABLE tb_comprobante (
     id_comprobante INT AUTO_INCREMENT PRIMARY KEY,
     monto          DECIMAL(10,2),
     fecha_pago     DATE,
     tipo           VARCHAR(20),
-    id_pedido      INT NOT NULL UNIQUE,
+    id_pedido      INT NOT NULL,
     CONSTRAINT fk_comprobante_pedido FOREIGN KEY (id_pedido)
         REFERENCES tb_pedido (id_pedido) ON DELETE RESTRICT
 );

@@ -1,28 +1,24 @@
-package com.digesk.backend.entity;
+package com.digesk.backend.dto;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "tb_comprobante")
-public class Comprobante {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ComprobanteDTO {
     private Integer idComprobante;
-
-    @Column(precision = 10, scale = 2)
     private BigDecimal monto;
-
     private LocalDate fechaPago;
+    private String tipo;
+    private Integer idPedido;
 
-    @Column(length = 20)
-    private String tipo; 
+    public ComprobanteDTO() {}
 
-    @ManyToOne
-    @JoinColumn(name = "idPedido", nullable = false)
-    private Pedido pedido;
+    public ComprobanteDTO(Integer idComprobante, BigDecimal monto, LocalDate fechaPago, String tipo, Integer idPedido) {
+        this.idComprobante = idComprobante;
+        this.monto = monto;
+        this.fechaPago = fechaPago;
+        this.tipo = tipo;
+        this.idPedido = idPedido;
+    }
 
     public Integer getIdComprobante() { return idComprobante; }
     public void setIdComprobante(Integer idComprobante) { this.idComprobante = idComprobante; }
@@ -32,6 +28,6 @@ public class Comprobante {
     public void setFechaPago(LocalDate fechaPago) { this.fechaPago = fechaPago; }
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
-    public Pedido getPedido() { return pedido; }
-    public void setPedido(Pedido pedido) { this.pedido = pedido; }
+    public Integer getIdPedido() { return idPedido; }
+    public void setIdPedido(Integer idPedido) { this.idPedido = idPedido; }
 }
