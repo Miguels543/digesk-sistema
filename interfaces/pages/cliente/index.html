@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clientes · Diges'k</title>
+<link rel="stylesheet" href="../../css/module.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">DIGES'K</span>
+    <span class="brand-sub">Sistema de Gestión</span>
+  </div>
+  <div class="topbar-meta" id="fechaHoy"></div>
+</header>
+
+<main>
+
+  <p class="status-note" id="statusNote"></p>
+
+  <div class="page-header">
+    <div>
+      <a class="back-link" href="../../index.html">← Volver</a>
+      <h1 class="page-title">Clientes</h1>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn btn-primary" id="btnNuevoCliente">+ Nuevo cliente</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Correo</th>
+          <th>Tipo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablaClientes">
+        <tr><td colspan="5" class="table-empty">Cargando clientes…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>Diges'k — Piura, Perú</footer>
+
+<!-- Modal: nuevo / editar cliente -->
+<div class="modal-overlay" id="modalCliente">
+  <div class="modal">
+    <h2 id="modalClienteTitulo">Nuevo cliente</h2>
+    <form id="formCliente">
+      <input type="hidden" id="clienteId">
+
+      <div class="form-group">
+        <label for="clienteNombre">Nombre</label>
+        <input type="text" id="clienteNombre" required>
+        <span class="form-error" id="errNombre">Ingresa el nombre del cliente.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="clienteTelefono">Teléfono</label>
+        <input type="tel" id="clienteTelefono" required>
+        <span class="form-error" id="errTelefono">Ingresa un teléfono válido.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="clienteCorreo">Correo</label>
+        <input type="email" id="clienteCorreo">
+        <span class="form-error" id="errCorreo">Correo no válido.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="clienteTipo">Tipo</label>
+        <select id="clienteTipo" required>
+          <option value="">Selecciona…</option>
+          <option value="Persona Natural">Persona Natural</option>
+          <option value="Empresa">Empresa</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" id="btnCancelarCliente">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: confirmar eliminación -->
+<div class="modal-overlay" id="modalConfirmarEliminar">
+  <div class="modal">
+    <h2>Eliminar cliente</h2>
+    <p style="margin-bottom: 20px; color: var(--gris); font-size: 0.9rem;">
+      Esta acción no se puede deshacer. ¿Deseas continuar?
+    </p>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="btnCancelarEliminar">Cancelar</button>
+      <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<script src="../../js/clientes.js"></script>
+</body>
+</html>

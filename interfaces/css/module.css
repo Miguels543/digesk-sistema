@@ -1,0 +1,33 @@
+@import url('base.css');
+@import url('tables.css');
+@import url('forms.css');
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.back-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--gris);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.back-link:hover { color: var(--rojo); }
+
+.page-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.8rem;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}

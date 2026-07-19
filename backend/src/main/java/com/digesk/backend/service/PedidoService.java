@@ -46,6 +46,14 @@ public class PedidoService {
         pedidoRepository.deleteById(id);
     }
 
+    // ===== NUEVO: pedidos con producto asignado pero sin cotización =====
+    public List<PedidoDTO> obtenerPedidosSinCotizar() {
+        return pedidoRepository.findByProductoIsNotNullAndCotizacionIsNull()
+                .stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
+
     private PedidoDTO convertirADTO(Pedido p) {
         return new PedidoDTO(
                 p.getIdPedido(), p.getDescripcion(), p.getCantidad(), p.getFechaEntrega(),

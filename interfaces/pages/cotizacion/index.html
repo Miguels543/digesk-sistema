@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotizaciones · Diges'k</title>
+<link rel="stylesheet" href="../../css/module.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">DIGES'K</span>
+    <span class="brand-sub">Sistema de Gestión</span>
+  </div>
+  <div class="topbar-meta" id="fechaHoy"></div>
+</header>
+
+<main>
+
+  <p class="status-note" id="statusNote"></p>
+
+  <div class="page-header">
+    <div>
+      <a class="back-link" href="../../index.html">← Volver</a>
+      <h1 class="page-title">Cotizaciones</h1>
+    </div>
+  </div>
+
+  <div class="section-label">Pedidos por cotizar</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablaPorCotizar">
+        <tr><td colspan="4" class="table-empty">Cargando pedidos…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">Cotizaciones generadas</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Pedido</th>
+          <th>Precio</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody id="tablaCotizaciones">
+        <tr><td colspan="4" class="table-empty">Cargando cotizaciones…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>Diges'k — Piura, Perú</footer>
+
+<script src="../../js/cotizaciones.js"></script>
+</body>
+</html>

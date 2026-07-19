@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedidos · Diges'k</title>
+<link rel="stylesheet" href="../../css/module.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">DIGES'K</span>
+    <span class="brand-sub">Sistema de Gestión</span>
+  </div>
+  <div class="topbar-meta" id="fechaHoy"></div>
+</header>
+
+<main>
+
+  <p class="status-note" id="statusNote"></p>
+
+  <div class="page-header">
+    <div>
+      <a class="back-link" href="../../index.html">← Volver</a>
+      <h1 class="page-title">Pedidos</h1>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn btn-primary" id="btnNuevoPedido">+ Nuevo pedido</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Entrega</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablaPedidos">
+        <tr><td colspan="6" class="table-empty">Cargando pedidos…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>Diges'k — Piura, Perú</footer>
+
+<!-- Modal: nuevo pedido -->
+<div class="modal-overlay" id="modalPedido">
+  <div class="modal">
+    <h2>Nuevo pedido</h2>
+    <form id="formPedido">
+
+      <div class="form-group">
+        <label for="pedidoCliente">Cliente</label>
+        <select id="pedidoCliente" required>
+          <option value="">Selecciona…</option>
+        </select>
+        <span class="form-error" id="errCliente">Selecciona un cliente.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="pedidoDescripcion">Descripción</label>
+        <textarea id="pedidoDescripcion" rows="3" required></textarea>
+        <span class="form-error" id="errDescripcion">Ingresa una descripción.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="pedidoCantidad">Cantidad</label>
+        <input type="number" id="pedidoCantidad" min="1" required>
+        <span class="form-error" id="errCantidad">Ingresa una cantidad válida.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="pedidoFechaEntrega">Fecha de entrega</label>
+        <input type="date" id="pedidoFechaEntrega" required>
+        <span class="form-error" id="errFecha">Selecciona una fecha.</span>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" id="btnCancelarPedido">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: agregar producto -->
+<div class="modal-overlay" id="modalProducto">
+  <div class="modal">
+    <h2>Agregar producto</h2>
+    <form id="formProducto">
+      <input type="hidden" id="productoPedidoId">
+
+      <div class="form-group">
+        <label for="productoTipo">Tipo</label>
+        <select id="productoTipo" required>
+          <option value="">Selecciona…</option>
+          <option value="Volante">Volante</option>
+          <option value="Tarjeta">Tarjeta</option>
+          <option value="Banner">Banner</option>
+          <option value="Afiche">Afiche</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="productoDescripcion">Descripción</label>
+        <input type="text" id="productoDescripcion" required>
+      </div>
+
+      <div class="form-group">
+        <label for="productoCantidad">Cantidad</label>
+        <input type="number" id="productoCantidad" min="1" required>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" id="btnCancelarProducto">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: cambiar estado -->
+<div class="modal-overlay" id="modalEstado">
+  <div class="modal">
+    <h2>Cambiar estado</h2>
+    <form id="formEstado">
+      <input type="hidden" id="estadoPedidoId">
+      <input type="hidden" id="estadoActual">
+
+      <div class="form-group">
+        <label for="estadoNuevo">Nuevo estado</label>
+        <select id="estadoNuevo" required>
+          <option value="Pendiente">Pendiente</option>
+          <option value="En Producción">En Producción</option>
+          <option value="Listo">Listo</option>
+          <option value="Entregado">Entregado</option>
+        </select>
+      </div>
+
+      <p class="form-error visible" id="avisoRetroceso" style="display:none;">
+        Estás retrocediendo el estado del pedido. ¿Confirmas el cambio?
+      </p>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" id="btnCancelarEstado">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../../js/pedidos.js"></script>
+</body>
+</html>

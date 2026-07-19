@@ -16,6 +16,11 @@ public class PedidoController {
     @GetMapping
     public List<PedidoDTO> listar() { return pedidoService.listar(); }
 
+    @GetMapping("/sin-cotizar")
+    public List<PedidoDTO> obtenerPedidosSinCotizar() {
+        return pedidoService.obtenerPedidosSinCotizar();
+    }
+    
     @GetMapping("/{id}")
     public PedidoDTO buscarPorId(@PathVariable Integer id) { return pedidoService.buscarPorId(id); }
 

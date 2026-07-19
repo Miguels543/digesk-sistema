@@ -1,0 +1,97 @@
+@import url('base.css');
+
+/* ===== Stat strip (tickets) ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 56px;
+}
+
+.stat-card {
+  position: relative;
+  background: var(--blanco);
+  border: 2px solid var(--negro);
+  padding: 18px 16px 16px;
+}
+
+.stat-card .stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--gris);
+}
+
+.stat-card .stat-divider {
+  border-top: 1px dashed var(--gris-claro);
+  margin: 10px 0;
+}
+
+.stat-card .stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+
+.stat-card.alerta .stat-value { color: var(--rojo); }
+.stat-card.alerta { border-color: var(--rojo); }
+
+/* ===== Module grid ===== */
+.modules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.module-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: var(--negro);
+  background: var(--blanco);
+  border: 1px solid var(--gris-claro);
+  padding: 24px 20px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.module-card .module-index {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--rojo);
+  margin-bottom: 18px;
+  display: block;
+}
+
+.module-card h3 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.module-card p {
+  font-size: 0.85rem;
+  color: var(--gris);
+}
+
+.module-card:hover {
+  background: var(--negro);
+  color: var(--blanco);
+  border-color: var(--negro);
+  transform: translateY(-2px);
+}
+
+.module-card:hover p { color: var(--gris-claro); }
+.module-card:hover .reg-mark { opacity: 1; border-color: var(--rojo); }
+.module-card:hover .reg-mark::before,
+.module-card:hover .reg-mark::after { background: var(--rojo); }
+
+.module-card:focus-visible {
+  outline: 2px solid var(--rojo);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}

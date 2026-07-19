@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cobranza · Diges'k</title>
+<link rel="stylesheet" href="../../css/module.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">DIGES'K</span>
+    <span class="brand-sub">Sistema de Gestión</span>
+  </div>
+  <div class="topbar-meta" id="fechaHoy"></div>
+</header>
+
+<main>
+
+  <p class="status-note" id="statusNote"></p>
+
+  <div class="page-header">
+    <div>
+      <a class="back-link" href="../../index.html">← Volver</a>
+      <h1 class="page-title">Cobranza</h1>
+    </div>
+  </div>
+
+  <div class="section-label">Listos para entrega</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablaListos">
+        <tr><td colspan="4" class="table-empty">Cargando pedidos…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">Deudas pendientes</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Pedido</th>
+          <th>Saldo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablaDeudas">
+        <tr><td colspan="4" class="table-empty">Cargando deudas…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>Diges'k — Piura, Perú</footer>
+
+<!-- Modal: registrar entrega y cobro -->
+<div class="modal-overlay" id="modalEntrega">
+  <div class="modal">
+    <h2>Registrar entrega y cobro</h2>
+    <form id="formEntrega">
+      <input type="hidden" id="entregaPedidoId">
+
+      <div class="form-group">
+        <label for="entregaMonto">Monto recibido (S/)</label>
+        <input type="number" id="entregaMonto" min="0" step="0.01" required>
+        <span class="form-error" id="errEntregaMonto">Ingresa un monto válido.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="entregaComprobante">Tipo de comprobante</label>
+        <select id="entregaComprobante" required>
+          <option value="Boleta">Boleta</option>
+          <option value="Factura">Factura</option>
+          <option value="Sin comprobante">Sin comprobante</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" id="btnCancelarEntrega">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: registrar abono -->
+<div class="modal-overlay" id="modalAbono">
+  <div class="modal">
+    <h2>Registrar abono</h2>
+    <form id="formAbono">
+      <input type="hidden" id="abonoEntregaId">
+
+      <div class="form-group">
+        <label for="abonoMonto">Monto del abono (S/)</label>
+        <input type="number" id="abonoMonto" min="0" step="0.01" required>
+        <span class="form-error" id="errAbonoMonto">Ingresa un monto válido.</span>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn" id="btnCancelarAbono">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../../js/cobranza.js"></script>
+</body>
+</html>

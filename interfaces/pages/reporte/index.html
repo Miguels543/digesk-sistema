@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reportes · Diges'k</title>
+<link rel="stylesheet" href="../../css/module.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">DIGES'K</span>
+    <span class="brand-sub">Sistema de Gestión</span>
+  </div>
+  <div class="topbar-meta" id="fechaHoy"></div>
+</header>
+
+<main>
+
+  <p class="status-note" id="statusNote"></p>
+
+  <div class="page-header">
+    <div>
+      <a class="back-link" href="../../index.html">← Volver</a>
+      <h1 class="page-title">Reportes</h1>
+    </div>
+  </div>
+
+  <form id="formFiltro" class="toolbar" style="justify-content: flex-start; gap: 16px; align-items: flex-end;">
+    <div class="form-group" style="margin-bottom: 0;">
+      <label for="fechaDesde">Desde</label>
+      <input type="date" id="fechaDesde" required>
+    </div>
+    <div class="form-group" style="margin-bottom: 0;">
+      <label for="fechaHasta">Hasta</label>
+      <input type="date" id="fechaHasta" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Generar reporte</button>
+  </form>
+
+  <div id="resultadoReporte" style="display: none;">
+
+    <div class="section-label">Resumen del periodo</div>
+    <div class="stats" style="margin-bottom: 40px;">
+      <div class="stat-card">
+        <span class="reg-mark tl"></span><span class="reg-mark br"></span>
+        <div class="stat-label">Ingresos totales</div>
+        <div class="stat-divider"></div>
+        <div class="stat-value" id="repIngresos">—</div>
+      </div>
+      <div class="stat-card">
+        <span class="reg-mark tl"></span><span class="reg-mark br"></span>
+        <div class="stat-label">Pedidos en el periodo</div>
+        <div class="stat-divider"></div>
+        <div class="stat-value" id="repPedidos">—</div>
+      </div>
+    </div>
+
+    <div class="section-label">Clientes frecuentes</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Pedidos</th>
+            <th>Total pagado</th>
+          </tr>
+        </thead>
+        <tbody id="tablaClientesFrecuentes">
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div id="reporteVacio" class="table-empty" style="display: none;">
+    Selecciona un rango de fechas y genera el reporte para ver los resultados.
+  </div>
+
+</main>
+
+<footer>Diges'k — Piura, Perú</footer>
+
+<script src="../../js/reportes.js"></script>
+</body>
+</html>

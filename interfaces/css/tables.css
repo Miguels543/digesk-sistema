@@ -1,0 +1,53 @@
+@import url('base.css');
+
+.table-wrap {
+  border: 1px solid var(--gris-claro);
+  overflow-x: auto;
+  margin-bottom: 40px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+thead th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--gris);
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--negro);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gris-claro);
+  vertical-align: middle;
+}
+
+tbody tr:hover { background: #FAFAF9; }
+
+.cell-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--gris);
+}
+
+.cell-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.table-empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--gris);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
