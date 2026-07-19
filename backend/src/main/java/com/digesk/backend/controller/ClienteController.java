@@ -1,49 +1,31 @@
 package com.digesk.backend.controller;
 
-import com.digesk.backend.entity.Cliente;
-import com.digesk.backend.repository.ClienteRepository;
+import com.digesk.backend.dto.ClienteDTO;
+import com.digesk.backend.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/clientes")
-@CrossOrigin(origins = "*")
 public class ClienteController {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
 
-    // Listar todos los clientes
     @GetMapping
-    public List<Cliente> listar() {
-        return clienteRepository.findAll();
-    }
+    public List<ClienteDTO> listar() { return clienteService.listar(); }
 
-    // Buscar un cliente por id
     @GetMapping("/{id}")
-    public Optional<Cliente> buscarPorId(@PathVariable Integer id) {
-        return clienteRepository.findById(id);
-    }
+    public ClienteDTO buscarPorId(@PathVariable Integer id) { return clienteService.buscarPorId(id); }
 
-    // Crear un cliente nuevo
     @PostMapping
-    public Cliente crear(@RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
-    }
+    public ClienteDTO crear(@RequestBody ClienteDTO dto) { return clienteService.crear(dto); }
 
-    // Actualizar un cliente existente
     @PutMapping("/{id}")
-    public Cliente actualizar(@PathVariable Integer id, @RequestBody Cliente clienteActualizado) {
-        clienteActualizado.setIdCliente(id);
-        return clienteRepository.save(clienteActualizado);
-    }
+    public ClienteDTO actualizar(@PathVariable Integer id, @RequestBody ClienteDTO dto) { return clienteService.actualizar(id, dto); }
 
-    // Eliminar un cliente
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Integer id) {
-        clienteRepository.deleteById(id);
-    }
+    public void eliminar(@PathVariable Integer id) { clienteService.eliminar(id); }
 }
