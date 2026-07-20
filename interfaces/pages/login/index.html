@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diges'k · Iniciar Sesión</title>
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/login.css">
+</head>
+<body>
+
+<main class="login-wrap">
+  <div class="login-card">
+    <span class="reg-mark tl"></span>
+    <span class="reg-mark tr"></span>
+    <span class="reg-mark bl"></span>
+    <span class="reg-mark br"></span>
+
+    <div class="brand">
+      <span class="brand-mark">DIGES'K</span>
+      <span class="brand-sub">Sistema de Gestión</span>
+    </div>
+
+    <h1>Iniciar Sesión</h1>
+
+    <form id="loginForm">
+      <label for="nombre">Usuario</label>
+      <input type="text" id="nombre" name="nombre" autocomplete="username" required>
+
+      <label for="contrasena">Contraseña</label>
+      <input type="password" id="contrasena" name="contrasena" autocomplete="current-password" required>
+
+      <p class="error-msg" id="errorMsg"></p>
+
+      <button type="submit">Ingresar</button>
+    </form>
+  </div>
+</main>
+
+<footer>Diges'k — Piura, Perú</footer>
+
+<script src="../../js/login.js"></script>
+</body>
+</html>

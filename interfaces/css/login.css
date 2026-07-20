@@ -1,0 +1,78 @@
+.login-wrap {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: var(--blanco);
+  border: 2px solid var(--negro);
+  padding: 40px 32px 32px;
+}
+
+.login-card .brand {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.login-card h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.3rem;
+  margin-bottom: 24px;
+}
+
+.login-card label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--gris);
+  margin-bottom: 6px;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid var(--gris-claro);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: var(--rojo);
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  background: var(--negro);
+  color: var(--blanco);
+  border: none;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.login-card button:hover { background: var(--rojo); }
+
+.error-msg {
+  display: none;
+  color: var(--rojo);
+  font-size: 0.8rem;
+  margin: -8px 0 16px;
+}
+
+.error-msg.visible { display: block; }

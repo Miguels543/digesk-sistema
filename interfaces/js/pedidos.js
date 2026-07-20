@@ -3,6 +3,20 @@ const ORDEN_ESTADOS = ["Pendiente", "En Producción", "Listo", "Entregado"];
 
 let mapaClientes = {}; // { idCliente: nombre }
 
+function rolActual() {
+  return window.usuarioActual ? window.usuarioActual.rol : null;
+}
+
+function esDisenador() {
+  return rolActual() === "Diseñador";
+}
+
+// Header con el rol de la sesión activa, para que el backend valide el permiso
+// en /api/pedidos (crear, editar, eliminar) y solo deje pasar "estado" al Diseñador.
+function headersConRol(extra = {}) {
+  return { "X-Rol": rolActual() || "", ...extra };
+}
+
 function actualizarFecha() {
   const ahora = new Date();
   const opciones = { weekday: "short", day: "2-digit", month: "short", year: "numeric" };
@@ -42,6 +56,14 @@ function formatearFecha(fechaIso) {
   return d.toLocaleDateString("es-PE", { day: "2-digit", month: "short", year: "numeric" });
 }
 
+// ===== Ajustar la UI según el rol (Diseñador solo actualiza estado, CU-04) =====
+function aplicarRestriccionesPorRol() {
+  if (!esDisenador()) return;
+
+  const btnNuevo = document.getElementById("btnNuevoPedido");
+  if (btnNuevo) btnNuevo.style.display = "none";
+}
+
 // ===== Cargar clientes (para el dropdown y para resolver nombres en la tabla) =====
 async function cargarClientes() {
   try {
@@ -73,6 +95,9 @@ async function cargarPedidos() {
       return;
     }
 
+    // El Diseñador solo puede cambiar el estado (CU-04): no ve el botón "+ Producto".
+    const puedeAgregarProducto = !esDisenador();
+
     tbody.innerHTML = pedidos.map(p => `
       <tr data-id="${p.idPedido}">
         <td>${escapeHtml(mapaClientes[p.idCliente] ?? "—")}</td>
@@ -82,7 +107,7 @@ async function cargarPedidos() {
         <td><span class="badge ${claseBadge(p.estado)}">${escapeHtml(p.estado)}</span></td>
         <td>
           <div class="cell-actions">
-            <button class="btn btn-sm btn-producto" data-id="${p.idPedido}">+ Producto</button>
+            ${puedeAgregarProducto ? `<button class="btn btn-sm btn-producto" data-id="${p.idPedido}">+ Producto</button>` : ""}
             <button class="btn btn-sm btn-estado" data-id="${p.idPedido}" data-estado="${p.estado}">Estado</button>
           </div>
         </td>
@@ -155,15 +180,18 @@ formPedido.addEventListener("submit", async (e) => {
   try {
     const res = await fetch(`${API_BASE}/pedidos`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: headersConRol({ "Content-Type": "application/json" }),
       body: JSON.stringify(payload)
     });
+    if (res.status === 403) throw new Error("permiso");
     if (!res.ok) throw new Error("guardar");
 
     cerrarModalPedido();
     cargarPedidos();
   } catch (err) {
-    mostrarError("No se pudo guardar el pedido. Intenta nuevamente.");
+    mostrarError(err.message === "permiso"
+      ? "No tienes permiso para crear pedidos."
+      : "No se pudo guardar el pedido. Intenta nuevamente.");
   }
 });
 
@@ -197,7 +225,7 @@ formProducto.addEventListener("submit", async (e) => {
   try {
     const res = await fetch(`${API_BASE}/productos`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: headersConRol({ "Content-Type": "application/json" }),
       body: JSON.stringify(payload)
     });
     if (!res.ok) throw new Error("guardar");
@@ -248,13 +276,16 @@ formEstado.addEventListener("submit", async (e) => {
   // El backend espera estado y confirmar como query params, no como body JSON.
   try {
     const url = `${API_BASE}/pedidos/${pedidoId}/estado?estado=${encodeURIComponent(nuevo)}&confirmar=true`;
-    const res = await fetch(url, { method: "PUT" });
+    const res = await fetch(url, { method: "PUT", headers: headersConRol() });
+    if (res.status === 403) throw new Error("permiso");
     if (!res.ok) throw new Error("estado");
 
     cerrarModalEstado();
     cargarPedidos();
   } catch (err) {
-    mostrarError("No se pudo cambiar el estado del pedido.");
+    mostrarError(err.message === "permiso"
+      ? "No tienes permiso para cambiar el estado de este pedido."
+      : "No se pudo cambiar el estado del pedido.");
   }
 });
 
@@ -279,6 +310,7 @@ document.getElementById("tablaPedidos").addEventListener("click", (e) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   actualizarFecha();
+  aplicarRestriccionesPorRol();
   await cargarClientes();
   cargarPedidos();
 });

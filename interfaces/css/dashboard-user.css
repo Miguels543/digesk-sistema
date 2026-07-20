@@ -1,0 +1,31 @@
+/* ===== Usuario y logout (agregar al final de dashboard.css) ===== */
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.topbar-user .user-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--gris);
+}
+
+.topbar-user .btn-logout {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: transparent;
+  border: 1px solid var(--gris-claro);
+  color: var(--negro);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.topbar-user .btn-logout:hover {
+  border-color: var(--rojo);
+  color: var(--rojo);
+}

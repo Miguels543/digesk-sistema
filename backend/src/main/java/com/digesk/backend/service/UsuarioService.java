@@ -1,5 +1,7 @@
 package com.digesk.backend.service;
 
+import com.digesk.backend.dto.LoginRequestDTO;
+import com.digesk.backend.dto.LoginResponseDTO;
 import com.digesk.backend.dto.UsuarioDTO;
 import com.digesk.backend.entity.Usuario;
 import com.digesk.backend.repository.UsuarioRepository;
@@ -36,6 +38,24 @@ public class UsuarioService {
 
     public void eliminar(Integer id) {
         usuarioRepository.deleteById(id);
+    }
+
+    /**
+     * Valida usuario/contraseña y devuelve los datos de sesión (sin la contraseña).
+     *
+     * NOTA: compara la contraseña en texto plano porque así se guarda actualmente
+     * en tb_usuario. Es la "opción rápida" documentada en el README para la demo;
+     * antes de un uso real habría que migrar a contraseñas con hash (BCrypt).
+     */
+    public LoginResponseDTO login(LoginRequestDTO request) {
+        Usuario u = usuarioRepository.findByNombre(request.getNombre())
+                .orElseThrow(() -> new RuntimeException("Usuario o contraseña incorrectos"));
+
+        if (!u.getContrasena().equals(request.getContrasena())) {
+            throw new RuntimeException("Usuario o contraseña incorrectos");
+        }
+
+        return new LoginResponseDTO(u.getIdUsuario(), u.getNombre(), u.getRol());
     }
 
     private UsuarioDTO convertirADTO(Usuario u) {
